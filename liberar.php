@@ -1,6 +1,6 @@
 <?php
 $username = $_GET['username'];
-$ip_mikrotik = "192.168.88.1";
+$ip_mikrotik = "10.10.0.1";
 $user_mikrotik = "RCVMnet";
 $pass_mikrotik = "#RCVMwifi.30min.net;";
 
