@@ -1,58 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Assista ao anúncio para liberar acesso</title>
-    <!-- Script do AdMob -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU_ID_DO_ADMOB"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        #ad-container { margin: 20px auto; width: 300px; height: 250px; }
-        #continue-btn { 
-            display: none; 
-            padding: 10px 20px; 
-            background: #4CAF50; 
-            color: white; 
-            border: none; 
-            cursor: pointer;
+    <title>Assista ao anúncio</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU_ID_ADMOB"></script>
+    <script>
+        function liberarAcesso() {
+            const username = new URLSearchParams(window.location.search).get('username');
+            const mac = new URLSearchParams(window.location.search).get('mac');
+            
+            // Opção 1: Redirecionar para um servidor externo que libera o acesso
+           // window.location.href = `http://SEU_SERVIDOR_EXTERNO/liberar?username=${username}&mac=${mac}`;
+
+            // Opção 2 (simples): Redirecionar para o "OK" do Hotspot do MikroTik (menos seguro)
+            window.location.href = `http://10.10.0.1/status?username=${username}`;
         }
-    </style>
+
+        // Forçar botão após 30 segundos (simulando tempo do anúncio)
+        setTimeout(() => {
+            document.getElementById('btn-liberar').style.display = 'block';
+        }, 30000);
+    </script>
 </head>
 <body>
-    <h1>Por favor, assista ao anúncio para liberar o acesso à internet.</h1>
-    
-    <!-- Container do anúncio -->
+    <h1>Assista ao anúncio para liberar o acesso:</h1>
     <div id="ad-container">
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-app-pub-6136891148161722~4183908111"
-             data-ad-slot="ca-app-pub-6136891148161722/2697526506"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+             data-ad-slot="ca-app-pub-6136891148161722/2697526506"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-
-    <!-- Botão de continuar (só aparece após X segundos) -->
-    <button id="continue-btn" onclick="liberarAcesso()">Continuar para a Internet</button>
-
-    <script>
-        // Mostrar o botão após 30 segundos (ou após o anúncio ser exibido)
-        setTimeout(function() {
-            document.getElementById("continue-btn").style.display = "block";
-        }, 30000); // 30 segundos
-
-        // Função para liberar acesso (chama um script no seu servidor)
-        function liberarAcesso() {
-            var username = new URLSearchParams(window.location.search).get('username');
-            var mac = new URLSearchParams(window.location.search).get('mac');
-            
-            // Envia uma requisição para liberar o usuário no MikroTik
-            fetch(`https://vinicius11xrl.github.io/RCVM_net/liberar.php?username=${username}&mac=${mac}`)
-                .then(response => {
-                    window.location.href = "rcvm.wifi.net/status"; // Redireciona após liberar
-                });
-        }
-    </script>
+    <button id="btn-liberar" onclick="liberarAcesso()" style="display:none;">Continuar</button>
 </body>
 </html>
