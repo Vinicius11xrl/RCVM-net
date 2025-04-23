@@ -1,6 +1,6 @@
 <?php
 $username = $_GET['username'];
-$ip_mikrotik = "IP_DO_SEU_MIKROTIK";
+$ip_mikrotik = "192.168.88.1";
 $user_mikrotik = "admin";
 $pass_mikrotik = "senha";
 
