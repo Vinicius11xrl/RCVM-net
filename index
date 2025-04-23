@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assista ao anúncio para liberar acesso</title>
+    <!-- Script do AdMob -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU_ID_DO_ADMOB"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #ad-container { margin: 20px auto; width: 300px; height: 250px; }
+        #continue-btn { 
+            display: none; 
+            padding: 10px 20px; 
+            background: #4CAF50; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Por favor, assista ao anúncio para liberar o acesso à internet.</h1>
+    
+    <!-- Container do anúncio -->
+    <div id="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-app-pub-6136891148161722~4183908111"
+             data-ad-slot="ca-app-pub-6136891148161722/2697526506"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Botão de continuar (só aparece após X segundos) -->
+    <button id="continue-btn" onclick="liberarAcesso()">Continuar para a Internet</button>
+
+    <script>
+        // Mostrar o botão após 30 segundos (ou após o anúncio ser exibido)
+        setTimeout(function() {
+            document.getElementById("continue-btn").style.display = "block";
+        }, 30000); // 30 segundos
+
+        // Função para liberar acesso (chama um script no seu servidor)
+        function liberarAcesso() {
+            var username = new URLSearchParams(window.location.search).get('username');
+            var mac = new URLSearchParams(window.location.search).get('mac');
+            
+            // Envia uma requisição para liberar o usuário no MikroTik
+            fetch(`http://SEU_SERVIDOR/liberar.php?username=${username}&mac=${mac}`)
+                .then(response => {
+                    window.location.href = "http://example.com"; // Redireciona após liberar
+                });
+        }
+    </script>
+</body>
+</html>
