@@ -1,8 +1,8 @@
 <?php
 $username = $_GET['username'];
 $ip_mikrotik = "192.168.88.1";
-$user_mikrotik = "admin";
-$pass_mikrotik = "senha";
+$user_mikrotik = "RCVMnet";
+$pass_mikrotik = "#RCVMwifi.30min.net;";
 
 // Conecta ao MikroTik via API
 $connection = ssh2_connect($ip_mikrotik, 22);
