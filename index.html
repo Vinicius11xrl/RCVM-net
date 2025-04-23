@@ -48,9 +48,9 @@
             var mac = new URLSearchParams(window.location.search).get('mac');
             
             // Envia uma requisição para liberar o usuário no MikroTik
-            fetch(`http://SEU_SERVIDOR/liberar.php?username=${username}&mac=${mac}`)
+            fetch(`https://vinicius11xrl.github.io/RCVM_net/liberar.php?username=${username}&mac=${mac}`)
                 .then(response => {
-                    window.location.href = "http://example.com"; // Redireciona após liberar
+                    window.location.href = "rcvm.wifi.net/status"; // Redireciona após liberar
                 });
         }
     </script>
