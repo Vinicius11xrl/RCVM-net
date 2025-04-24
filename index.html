@@ -42,7 +42,7 @@
         // Função para liberar acesso via endpoint de login do MikroTik
         function liberarAcesso() {
             const username = new URLSearchParams(window.location.search).get('username');
-            const password = "senha_padrao"; // ⚠️ Substitua pela senha do usuário temporário
+            const password = "#RCVMwifi.30min.net;"; // ⚠️ Substitua pela senha do usuário temporário
             
             // Endpoint de login direto do MikroTik (HTTP)
             window.location.href = `http://10.0.0.1/login?username=${username}&password=${password}`;
