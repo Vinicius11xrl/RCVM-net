@@ -1,35 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Assista ao anúncio</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU_ID_ADMOB"></script>
-    <script>
-        function liberarAcesso() {
-            const username = new URLSearchParams(window.location.search).get('username');
-            const mac = new URLSearchParams(window.location.search).get('mac');
-            
-            // Opção 1: Redirecionar para um servidor externo que libera o acesso
-           // window.location.href = `http://SEU_SERVIDOR_EXTERNO/liberar?username=${username}&mac=${mac}`;
-
-            // Opção 2 (simples): Redirecionar para o "OK" do Hotspot do MikroTik (menos seguro)
-            window.location.href = `http://10.10.0.1/status?username=${username}`;
+    <title>Assista ao anúncio para liberar acesso</title>
+    <!-- Script do AdMob -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-6136891148161722~4183908111"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #ad-container { margin: 20px auto; width: 300px; height: 250px; }
+        #continue-btn { 
+            display: none; 
+            padding: 10px 20px; 
+            background: #4CAF50; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
         }
-
-        // Forçar botão após 30 segundos (simulando tempo do anúncio)
-        setTimeout(() => {
-            document.getElementById('btn-liberar').style.display = 'block';
-        }, 30000);
-    </script>
+    </style>
 </head>
 <body>
-    <h1>Assista ao anúncio para liberar o acesso:</h1>
+    <h1>Assista ao anúncio para liberar o acesso por 30 minutos:</h1>
+    
+    <!-- Container do anúncio do AdMob -->
     <div id="ad-container">
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-app-pub-6136891148161722~4183908111"
-             data-ad-slot="ca-app-pub-6136891148161722/2697526506"></ins>
+             data-ad-slot="ca-app-pub-6136891148161722/2697526506"
+             data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <button id="btn-liberar" onclick="liberarAcesso()" style="display:none;">Continuar</button>
+
+    <!-- Botão "Continuar" (aparece após 30 segundos) -->
+    <button id="continue-btn" onclick="liberarAcesso()">Continuar para a Internet</button>
+
+    <script>
+        // Mostrar o botão após 30 segundos (tempo estimado do anúncio)
+        setTimeout(function() {
+            document.getElementById("continue-btn").style.display = "block";
+        }, 30000);
+
+        // Função para liberar acesso via endpoint de login do MikroTik
+        function liberarAcesso() {
+            const username = new URLSearchParams(window.location.search).get('username');
+            const password = "senha_padrao"; // ⚠️ Substitua pela senha do usuário temporário
+            
+            // Endpoint de login direto do MikroTik (HTTP)
+            window.location.href = `http://10.0.0.1/login?username=${username}&password=${password}`;
+            
+            // Se o MikroTik usa HTTPS, substitua por:
+            // window.location.href = `https://IP_DO_MIKROTIK/login?username=${username}&password=${password}`;
+        }
+    </script>
 </body>
 </html>
